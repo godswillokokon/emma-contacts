@@ -1,6 +1,0 @@
-module Pods_emma_emmaTests {
-  umbrella header "Pods-emma-emmaTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
