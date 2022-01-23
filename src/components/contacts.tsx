@@ -1,17 +1,17 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   StyleSheet,
   FlatList,
   NativeScrollEvent,
   NativeSyntheticEvent,
-} from 'react-native';
-import ContactHeader from './contactHeader';
-import ContactBody from './contactBody';
-import {ContactsType, ContactsDataProps} from '../../index.d';
-import {HEIGHT, WIDTH} from '../constants';
+} from "react-native";
+import ContactHeader from "./contactHeader";
+import ContactBody from "./contactBody";
+import { ContactsType, ContactsDataProps } from "../../index.d";
+import { HEIGHT, WIDTH } from "../constants";
 
-const Contacts = ({contactsData}: ContactsDataProps) => {
+const Contacts = ({ contactsData }: ContactsDataProps) => {
   const HeaderRef = React.useRef<FlatList>(null);
   const ContactsBodyRef = React.useRef<FlatList>(null);
   const [currentIndex, setCurrentIndex] = React.useState(0);
@@ -27,7 +27,7 @@ const Contacts = ({contactsData}: ContactsDataProps) => {
       const roundIndex = Math.round(index);
       setCurrentIndex(roundIndex);
     },
-    [],
+    []
   );
 
   const onScrollX = React.useCallback(
@@ -38,7 +38,7 @@ const Contacts = ({contactsData}: ContactsDataProps) => {
       setCurrentIndex(roundIndex);
     },
 
-    [],
+    []
   );
   React.useEffect(() => {
     ContactsBodyRef.current?.scrollToIndex({
@@ -67,7 +67,7 @@ const Contacts = ({contactsData}: ContactsDataProps) => {
       index,
     };
   };
-  const renderContactHeader = ({item: contact, index}: ContactsType) => {
+  const renderContactHeader = ({ item: contact, index }: ContactsType) => {
     if (!contact) {
       return null;
     }
@@ -83,11 +83,11 @@ const Contacts = ({contactsData}: ContactsDataProps) => {
     );
   };
 
-  const renderContactBody = ({item: contact, index}: ContactsType) => {
+  const renderContactBody = ({ item: contact, index }: ContactsType) => {
     if (!contact) {
       return null;
     }
-    return <ContactBody {...{contact, index}} />;
+    return <ContactBody {...{ contact, index }} />;
   };
 
   return (
@@ -97,7 +97,7 @@ const Contacts = ({contactsData}: ContactsDataProps) => {
         showsHorizontalScrollIndicator={false}
         renderItem={renderContactHeader}
         horizontal
-        keyExtractor={item => item.id}
+        keyExtractor={(item) => item.id}
         ref={HeaderRef}
         onMomentumScrollEnd={onScrollX}
         pagingEnabled={true}
@@ -108,21 +108,23 @@ const Contacts = ({contactsData}: ContactsDataProps) => {
         contentContainerStyle={styles.headerContentStyle}
         scrollEventThrottle={16}
         decelerationRate="fast"
+        testID={"header-list"}
       />
       <FlatList
         data={contactsData}
         showsVerticalScrollIndicator={false}
         renderItem={renderContactBody}
-        keyExtractor={item => item.id}
+        keyExtractor={(item) => item.id}
         bounces={false}
         ref={ContactsBodyRef}
         onMomentumScrollEnd={onScrollY}
-        snapToAlignment={'start'}
+        snapToAlignment={"start"}
         snapToInterval={HEIGHT}
         getItemLayout={getItemLayoutY}
         scrollEventThrottle={16}
         decelerationRate="fast"
         viewabilityConfig={_viewabilityConfig}
+        testID={"body-list"}
       />
     </View>
   );
@@ -131,23 +133,23 @@ const styles = StyleSheet.create({
   backgroundStyle: {
     flex: 1,
     paddingVertical: 10,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   body: {
-    alignSelf: 'center',
+    alignSelf: "center",
     height: HEIGHT,
-    width: '90%',
+    width: "90%",
   },
   headerContentStyle: {
     paddingVertical: 20,
     paddingHorizontal: 130,
-    alignItems: 'center',
+    alignItems: "center",
   },
   imageContainer: {
     width: WIDTH,
     height: 72,
     borderRadius: 100,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
 });
 
