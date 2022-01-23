@@ -17,21 +17,21 @@
 ## Folder structure
 
 - `__tests__`: This folder contains all test files.
-- `src`: This folder is the main container of all the code inside your application.
+- `src`: This folder is the main container of all the code inside the application.
     - `assets`: Asset folder contains all media files.
         - `images`: Image contains all images.
     - `components`: This Folder contains any common component that is use through-out the app.
     - `constants`: This Folder contains any kind of constant that is use such as WIDTH, HEIGHT, etc.
 - `index.d.ts`: This contains all interface and type used in this project.
-- `data.js`: this is mock data.
+- `data.js`: This is mock data.
 - `App.js`: Main component that starts the whole app.
 - `index.js`: Entry point of the application as per React-Native standards.
 
 ## How to start app
 
-- Go to your project's root directory on your terminal and run `npm install` or `yarn` to install all dependencies of the project.
-- If you are using Xcode 12.5 or higher got to /ios and execute `pod install --`repo-update`
-- On the root directory run `npm run ios` or `npm run android` to start your application!
+- Go to the project's root directory on your terminal and run `npm install` or `yarn` to install all dependencies of the project.
+- If you are using Xcode 12.5 or higher got to /ios and execute `pod install`
+- On the root directory run `npm run ios` or `npm run android` to start the application!
 
 (Using yarn: `yarn ios` or `yarn android`)
 
