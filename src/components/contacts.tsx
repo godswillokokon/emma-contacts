@@ -14,12 +14,14 @@ import { HEIGHT, WIDTH } from "../constants";
 const Contacts = ({ contactsData }: ContactsDataProps) => {
   const HeaderRef = React.useRef<FlatList>(null);
   const ContactsBodyRef = React.useRef<FlatList>(null);
+
   const [currentIndex, setCurrentIndex] = React.useState(0);
 
   const _viewabilityConfig = {
     itemVisiblePercentThreshold: 50,
   };
 
+  // Check if ContactsBodyRef scroll and set a new currentIndex
   const onScrollY = React.useCallback(
     (event: NativeSyntheticEvent<NativeScrollEvent>) => {
       const slideSize = HEIGHT;
@@ -30,6 +32,7 @@ const Contacts = ({ contactsData }: ContactsDataProps) => {
     []
   );
 
+  // Check if HeaderRef scroll and set a new currentIndex
   const onScrollX = React.useCallback(
     (event: NativeSyntheticEvent<NativeScrollEvent>) => {
       const slideSize = WIDTH;
@@ -37,9 +40,10 @@ const Contacts = ({ contactsData }: ContactsDataProps) => {
       const roundIndex = Math.round(index);
       setCurrentIndex(roundIndex);
     },
-
     []
   );
+
+  // Update ContactsBodyRef and HeaderRef position respectfully
   React.useEffect(() => {
     ContactsBodyRef.current?.scrollToIndex({
       index: currentIndex,
@@ -52,7 +56,7 @@ const Contacts = ({ contactsData }: ContactsDataProps) => {
       viewPosition: 0,
     });
   }, [currentIndex]);
-
+  // ContactsBodyRef Item Layout
   const getItemLayoutY = (data: any, index: number) => {
     return {
       length: styles.body.height,
@@ -60,6 +64,7 @@ const Contacts = ({ contactsData }: ContactsDataProps) => {
       index,
     };
   };
+  // HeaderRef Item Layout
   const getItemLayoutX = (data: any, index: number) => {
     return {
       length: styles.imageContainer.width,
@@ -67,10 +72,9 @@ const Contacts = ({ contactsData }: ContactsDataProps) => {
       index,
     };
   };
+
   const renderContactHeader = ({ item: contact, index }: ContactsType) => {
-    if (!contact) {
-      return null;
-    }
+    if (!contact) return null;
     return (
       <ContactHeader
         {...{
@@ -82,11 +86,8 @@ const Contacts = ({ contactsData }: ContactsDataProps) => {
       />
     );
   };
-
   const renderContactBody = ({ item: contact, index }: ContactsType) => {
-    if (!contact) {
-      return null;
-    }
+    if (!contact) return null;
     return <ContactBody {...{ contact, index }} />;
   };
 
