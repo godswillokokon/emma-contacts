@@ -1,0 +1,6 @@
+module Pods_emma {
+  umbrella header "Pods-emma-umbrella.h"
+
+  export *
+  module * { export * }
+}
